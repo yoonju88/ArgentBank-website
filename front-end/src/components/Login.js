@@ -2,7 +2,6 @@ import React from 'react'
 import {useDispatch, useSelector } from 'react-redux'
 import {userLogin} from '../helpers/api';
 import {useNavigate} from 'react-router-dom';
-import { loginUserStart } from '../store/authSlice';
 
 
 function Login() {
@@ -17,7 +16,7 @@ function Login() {
         const resultAction= await dispatch(userLogin({email, password}));
         if (userLogin.fulfilled.match(resultAction)) {
             navigate('/profile');
-        }    else {
+        }else {
             console.error('login failed', resultAction.payload)
         }      
     };
