@@ -48,13 +48,14 @@ module.exports.getUserProfile = async serviceData => {
 
 module.exports.loginUser = async serviceData => {
   try {
-    const user = await User.findOne({ email: serviceData.Email })
+    console.log('login attempt with', serviceData)
+    const user = await User.findOne({ email: serviceData.email })
 
     if (!user) {
       throw new Error('user not found!')
     }
 
-    const isValid = await bcrypt.compare(serviceData.Password, user.password)
+    const isValid = await bcrypt.compare(serviceData.password, user.password)
 
     if (!isValid) {
       throw new Error('Password is invalid')

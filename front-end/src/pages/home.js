@@ -5,7 +5,7 @@ import iconSecurity from "../img/icon-security.webp"
 
 function Home () {
     return (
-        <main>
+        <>
             <div className="hero">
                 <section className="hero-content">
                 <h2 className="sr-only">Promoted Content</h2>
@@ -49,7 +49,7 @@ function Home () {
                 </p>
                 </div>
             </section>
-        </main>
+        </>
     )
 
 }
