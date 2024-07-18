@@ -2,6 +2,7 @@ import React from 'react'
 import {useDispatch, useSelector } from 'react-redux'
 import {userLogin} from '../helpers/api';
 import {useNavigate} from 'react-router-dom';
+import { loginUserStart,loginUserFailure } from '../store/authSlice';
 
 
 function Login() {
@@ -13,12 +14,19 @@ function Login() {
         e.preventDefault ();
         const email = e.target.email.value;
         const password = e.target.password.value;
+        dispatch(loginUserStart());
         const resultAction= await dispatch(userLogin({email, password}));
+        console.log(resultAction)
+            
         if (userLogin.fulfilled.match(resultAction)) {
-            navigate('/profile');
+            const {token} = resultAction.payload.body
+            localStorage.setItem('userToken', token)
+                navigate('/profile');
         }else {
-            console.error('login failed', resultAction.payload)
-        }      
+                dispatch(loginUserFailure(resultAction.payload))
+                console.error('login failed', resultAction.payload) 
+        }
+             
     };
 
     return (
