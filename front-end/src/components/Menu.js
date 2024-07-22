@@ -1,18 +1,25 @@
 import React,{useEffect, useState} from 'react'
 import logo from '../img/argentBankLogo.webp';
 import {NavLink} from 'react-router-dom';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
+import { logoutUser } from '../store/authSlice';
 
 function Menu () {
-    const [ownAToken, setOwnAToken] = useState(null)
-    const haveToken = useSelector((state)=> state.auth.token)
+    const dispatch = useDispatch()
+    const {user, token} = useSelector((state)=> state.auth)
+    const [userData, setUserData]= useState(null)
 
-    useEffect(() => {
-        if (haveToken){
-            setOwnAToken(haveToken)
+    useEffect (() => {
+        if (user&& token) {
+            setUserData(user)
         }
-    },[haveToken])
+    }, [user, token])
 
+    const handleLogOut = () => {
+        localStorage.removeItem('userToken')  
+        dispatch(logoutUser())   // update Redux state : remove userdata and token
+    }
+  
     return (
         <header>
             <nav className="main-nav">
@@ -25,14 +32,14 @@ function Menu () {
                     <h1 className="sr-only">Argent Bank</h1>
                 </NavLink>
                 <div>
-                    {haveToken ? (
+                {token ? (
                     <>
                         <NavLink className="main-nav-item" to="/profile">
-                            <i class="fa fa-user-circle"></i>
-                            Name
+                            <i className="fa fa-user-circle"></i>
+                            {userData?.firstName}
                         </NavLink>
-                        <NavLink className="main-nav-item" to="/">
-                            <i class="fa fa-sign-out"></i>
+                        <NavLink className="main-nav-item" to='/' onClick={handleLogOut}>
+                            <i className="fa fa-sign-out"></i>
                             Sign Out
                         </NavLink> 
                     </>
@@ -42,15 +49,6 @@ function Menu () {
                                 Sign In
                          </NavLink>
                     )}
-                    
-                   {/* <NavLink className="main-nav-item" to="/profile">
-                        <i class="fa fa-user-circle"></i>
-                        Tony
-                    </NavLink>
-                    <NavLink className="main-nav-item" to="/">
-                        <i class="fa fa-sign-out"></i>
-                         Sign Out
-                    </NavLink> */}
                 </div>                
             </nav>
         </header>

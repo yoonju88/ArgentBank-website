@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { userLogin } from '../helpers/api';
+import { userLogin, userProfile} from '../helpers/api';
 import { useNavigate } from 'react-router-dom';
 import { loginUserStart, loginUserFailure, loginUserSuccess } from '../store/authSlice';
 
@@ -19,13 +19,22 @@ function Login() {
         if (userLogin.fulfilled.match(resultAction)) {
             const { token } = resultAction.payload.body
             localStorage.setItem('userToken', token)
-            dispatch(loginUserSuccess({ token }))
-            navigate('/profile');
+            console.log("save token", token)
+            //request profil data
+            const receptionProfile = await userProfile(token)
+            const userData = receptionProfile.body
+            //save user data
+            dispatch(loginUserSuccess({
+                user: userData,
+                token
+            }))
+            navigate('/profile') // redirection to profile page
         } else {
             dispatch(loginUserFailure(resultAction.payload))
             console.error('login failed', resultAction.payload)
         }
     };
+
     return (
         <>
             <form onSubmit={handleLogin}>

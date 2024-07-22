@@ -12,6 +12,7 @@ export const userLogin = createAsyncThunk(
                 { email, password },
                 {
                     headers: {
+                        'Accept': `application/json`,
                         'Content-Type': 'application/json'
                     }
                 }
@@ -31,14 +32,16 @@ export const userLogin = createAsyncThunk(
 
 export const userProfile = async (token) => {
     try {
-        const response = await axios.post(`{baseUrl)/user/profile`, 
+        const response = await axios.post(
+            `${baseUrl}/user/profile`, 
+            {},
             {
                 headers: {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type' : 'application/json'
                 }
             })
             return response.data
-            console.log('pofile data', response.data)
         }catch (error) {
             console.log('Error posting user profile', error)
             throw error
