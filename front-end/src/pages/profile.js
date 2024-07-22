@@ -1,7 +1,7 @@
 import React from "react"
 import Login from "../components/Login"
  
-function SignIn () {
+function Profile () {
     return (
         <>
             <section className="sign-in-content">
@@ -14,4 +14,4 @@ function SignIn () {
 
 }
 
-export default SignIn;
+export default Profile;

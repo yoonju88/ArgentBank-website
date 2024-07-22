@@ -5,15 +5,15 @@ const jwt = require('jsonwebtoken')
 module.exports.createUser = async serviceData => {
   console.log(serviceData)
   try {
-    const user = await User.findOne({ email: serviceData.Email })
+    const user = await User.findOne({ email: serviceData.email })
     if (user) {
       throw new Error('Email already exists')
     }
 
-    const hashPassword = await bcrypt.hash(serviceData.Password, 12)
+    const hashPassword = await bcrypt.hash(serviceData.password, 12)
 
     const newUser = new User({
-      email: serviceData.Email,
+      email: serviceData.email,
       password: hashPassword,
       firstName: serviceData.firstName,
       lastName: serviceData.lastName,
@@ -49,7 +49,7 @@ module.exports.getUserProfile = async serviceData => {
 module.exports.loginUser = async serviceData => {
   try {
     console.log('login attempt with', serviceData)
-    const user = await User.findOne({ email: serviceData.email })
+    const user = await User.findOne({ email:  serviceData.email })
 
     if (!user) {
       throw new Error('user not found!')

@@ -16,16 +16,37 @@ export const userLogin = createAsyncThunk(
                     }
                 }
             )
-            return response.data;
+            console.log('API Response Status:', response.status);
+            console.log('API Response Headers:', response.headers);
+            console.log('API Response Data:', response.data);
+            return response.data                     
         } catch (error) {
             if (error.response) {
+                console.log('error response data:', error.response.data)
                 return rejectWithValue(error.response.data)
             } else {
+                console.log('error message:', error.message)
                 return rejectWithValue(error.message)
             }
         }
     }
 )
+
+export const userProfile = async (token) => {
+    try {
+        const response = await axios.post (`{baseUrl)/user/profile`, 
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return response.data
+            console.log('pofile data', response.data)
+        }catch (error) {
+            console.log('Error posting user profile', error)
+            throw error
+        }
+}
 /*
 export const signup = async (email, password, firstName, lastName, userName) => {
     try {

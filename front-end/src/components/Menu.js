@@ -1,10 +1,18 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import logo from '../img/argentBankLogo.webp';
 import {NavLink} from 'react-router-dom';
 import { useSelector } from "react-redux";
 
 function Menu () {
-    const user = useSelector ((state)=> state.auth.user)
+    const [ownAToken, setOwnAToken] = useState(null)
+    const haveToken = useSelector((state)=> state.auth.token)
+
+    useEffect(() => {
+        if (haveToken){
+            setOwnAToken(haveToken)
+        }
+    },[haveToken])
+
     return (
         <header>
             <nav className="main-nav">
@@ -17,11 +25,11 @@ function Menu () {
                     <h1 className="sr-only">Argent Bank</h1>
                 </NavLink>
                 <div>
-                    {user ? (
+                    {haveToken ? (
                     <>
                         <NavLink className="main-nav-item" to="/profile">
                             <i class="fa fa-user-circle"></i>
-                            {user.firstName}
+                            Name
                         </NavLink>
                         <NavLink className="main-nav-item" to="/">
                             <i class="fa fa-sign-out"></i>

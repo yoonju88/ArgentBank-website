@@ -1,34 +1,31 @@
-import React from 'react'
-import {useDispatch, useSelector } from 'react-redux'
-import {userLogin} from '../helpers/api';
-import {useNavigate} from 'react-router-dom';
-import { loginUserStart,loginUserFailure } from '../store/authSlice';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { userLogin } from '../helpers/api';
+import { useNavigate } from 'react-router-dom';
+import { loginUserStart, loginUserFailure, loginUserSuccess } from '../store/authSlice';
 
 
 function Login() {
     const dispatch = useDispatch();
-    const {loading, error} = useSelector((state) => state.auth);
+    const [email, setUserEmail] = useState('')
+    const [password, setUserPassword] = useState('')
+    const { loading, error } = useSelector((state) => state.auth);
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
-        e.preventDefault ();
-        const email = e.target.email.value;
-        const password = e.target.password.value;
+        e.preventDefault();
         dispatch(loginUserStart());
-        const resultAction= await dispatch(userLogin({email, password}));
-        console.log(resultAction)
-            
+        const resultAction = await dispatch(userLogin({ email, password }));
         if (userLogin.fulfilled.match(resultAction)) {
-            const {token} = resultAction.payload.body
+            const { token } = resultAction.payload.body
             localStorage.setItem('userToken', token)
-                navigate('/profile');
-        }else {
-                dispatch(loginUserFailure(resultAction.payload))
-                console.error('login failed', resultAction.payload) 
+            dispatch(loginUserSuccess({ token }))
+            navigate('/profile');
+        } else {
+            dispatch(loginUserFailure(resultAction.payload))
+            console.error('login failed', resultAction.payload)
         }
-             
     };
-
     return (
         <>
             <form onSubmit={handleLogin}>
@@ -39,6 +36,8 @@ function Login() {
                         id="email"
                         name="email"
                         autoComplete="on"
+                        value={email}
+                        onChange={(e) => setUserEmail(e.target.value)}
                         required
                     />
                 </div>
@@ -49,6 +48,8 @@ function Login() {
                         id="password"
                         name="password"
                         autoComplete="on"
+                        value={password}
+                        onChange={(e) => setUserPassword(e.target.value)}
                         required
                     />
                 </div>
@@ -59,7 +60,7 @@ function Login() {
                 <button className="sign-in-button" type="submit">Sign In</button>
             </form>
             {loading && <p>Loading</p>}
-            {error&& <p>{error.message}</p>}
+            {error && <p>{error.message}</p>}
         </>
     )
 }

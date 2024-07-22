@@ -3,7 +3,7 @@ import {Routes, Route, useLocation} from 'react-router-dom';
 import React from 'react'
 import Menu from './components/Menu'
 import Home from './pages/home'
-import SignIn from './pages/signIn'
+import Profile from './pages/profile'
 import User from './pages/user'
 
 
@@ -16,7 +16,7 @@ function App() {
       <main className={currentPage === '/' ? "" : "main bg-dark"}>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<SignIn />} />
+        <Route path="/login" element={<Profile />} />
         <Route path="/profile" element={<User />} />
       </Routes>
       </main>
