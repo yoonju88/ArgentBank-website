@@ -16,9 +16,6 @@ export const userLogin = createAsyncThunk(
                     }
                 }
             )
-            console.log('API Response Status:', response.status);
-            console.log('API Response Headers:', response.headers);
-            console.log('API Response Data:', response.data);
             return response.data                     
         } catch (error) {
             if (error.response) {
@@ -34,7 +31,7 @@ export const userLogin = createAsyncThunk(
 
 export const userProfile = async (token) => {
     try {
-        const response = await axios.post (`{baseUrl)/user/profile`, 
+        const response = await axios.post(`{baseUrl)/user/profile`, 
             {
                 headers: {
                     'Authorization': `Bearer ${token}`
