@@ -3,7 +3,7 @@ import {userLogin} from '../helpers/api'
 
 const initialState = {
     user:null,
-    token:null,
+    token: localStorage.getItem('userToken') || null, // initial token state with localstorage to verifie an token existe.
     loading:false,
     error:null // for monitoring the registration process. 
 }
