@@ -66,10 +66,18 @@ function Login() {
                     <input type="checkbox" id="remember-me" />
                     <label htmlFor="remember-me">Remember me</label>
                 </div>
-                <button className="sign-in-button" type="submit">Sign In</button>
+                <button className="sign-in-button" type="submit">
+                    {loading ?
+                        ( <span>Sign In ...</span> ) 
+                        : (<span>Sign In</span>)
+                    }
+                </button>
             </form>
-            {loading && <p>Loading</p>}
-            {error && <p>{error.message}</p>}
+            {error && 
+            <div className="error-container">
+                <p className='error-msg'>{error.message}</p>
+            </div>
+            }
         </>
     )
 }

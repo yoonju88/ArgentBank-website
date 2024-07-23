@@ -1,3 +1,5 @@
+
+
 html {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -76,6 +78,16 @@ body {
 .main-nav-logo-image {
   max-width: 100%;
   width: 200px;
+}
+
+.loading i{
+ color: white;
+ font-weight: bold;
+ font-size: medium;
+}
+.error-msg {
+  color :red;
+  font-weight: bold;
 }
 
 .hero {
