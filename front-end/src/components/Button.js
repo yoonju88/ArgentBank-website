@@ -8,7 +8,7 @@ const Button = ({ className, type, onClick, loading, children }) => {
             className={className}
             type={type || "button"}
             onClick={onClick}
-            disable={loading}
+            disabled={loading}
         >
             {loading ? <span>Sign In...</span> : children}
         </button>

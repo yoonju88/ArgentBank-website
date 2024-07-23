@@ -26,6 +26,8 @@ Field.propTypes = {
     name: PropTypes.string,
     value: PropTypes.string,
     onChange: PropTypes.func.isRequired,
+    required:PropTypes.bool,
+    label:PropTypes.string,
 };
 
 export default Field
