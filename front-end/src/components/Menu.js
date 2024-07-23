@@ -38,7 +38,7 @@ function Menu () {
                             <i className="fa fa-user-circle"></i>
                             {userData?.firstName}
                         </NavLink>
-                        <NavLink className="main-nav-item" to='/' onClick={handleLogOut}>
+                        <NavLink className="main-nav-item" to="/" onClick={handleLogOut}>
                             <i className="fa fa-sign-out"></i>
                             Sign Out
                         </NavLink> 

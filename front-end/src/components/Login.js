@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { Component, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogin, userProfile} from '../helpers/api';
 import { useNavigate } from 'react-router-dom';
 import { loginUserStart, loginUserFailure, loginUserSuccess } from '../store/authSlice';
+import Button from './Button' 
 
 
 function Login() {
@@ -66,12 +67,13 @@ function Login() {
                     <input type="checkbox" id="remember-me" />
                     <label htmlFor="remember-me">Remember me</label>
                 </div>
-                <button className="sign-in-button" type="submit">
-                    {loading ?
-                        ( <span>Sign In ...</span> ) 
-                        : (<span>Sign In</span>)
-                    }
-                </button>
+                <Button 
+                    className="sign-in-button" 
+                    type="submit"
+                    loading ={loading}
+                >        
+                    Sign In 
+                </Button>
             </form>
             {error && 
             <div className="error-container">
