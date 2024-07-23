@@ -1,9 +1,10 @@
-import React, { Component, useState } from 'react'
+import React, {useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogin, userProfile} from '../helpers/api';
 import { useNavigate } from 'react-router-dom';
 import { loginUserStart, loginUserFailure, loginUserSuccess } from '../store/authSlice';
 import Button from './Button' 
+import Field from './Field';
 
 
 function Login() {
@@ -36,33 +37,30 @@ function Login() {
         }
     };
 
+
     return (
         <>
             <form onSubmit={handleLogin}>
-                <div className="input-wrapper">
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        autoComplete="on"
-                        value={email}
-                        onChange={(e) => setUserEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div className="input-wrapper">
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        autoComplete="on"
-                        value={password}
-                        onChange={(e) => setUserPassword(e.target.value)}
-                        required
-                    />
-                </div>
+            <Field
+                label="Email"
+                type="email"
+                id="email"
+                name="Email"
+                autoComplete="on"
+                value={email}                
+                onChange={(e) => setUserEmail(e.target.value)}
+                Required
+            />
+            <Field
+                label="Password"
+                type="password"
+                id="password"
+                name="Password"
+                autoComplete="on"
+                value={password}                
+                onChange={(e) => setUserPassword(e.target.value)}
+                Required
+            />
                 <div className="input-remember">
                     <input type="checkbox" id="remember-me" />
                     <label htmlFor="remember-me">Remember me</label>
