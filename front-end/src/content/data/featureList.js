@@ -1,6 +1,6 @@
-import chatIcon from '../img/icon-chat.webp'
-import moneyIcon from '../img/icon-money.webp'
-import securityIcon from '../img/icon-money.webp'
+import chatIcon from '../../img/icon-chat.webp'
+import moneyIcon from '../../img/icon-money.webp'
+import securityIcon from '../../img/icon-money.webp'
 
 
 export const featureList = [
