@@ -31,10 +31,10 @@ function Menu () {
                     />
                     <h1 className="sr-only">Argent Bank</h1>
                 </NavLink>
-                <div>
+                <div className={token? "main-nav-user" : ""}>
                 {token ? (
                     <>
-                        <NavLink className="main-nav-item" to="/profile">
+                        <NavLink className="main-nav-item " to="/profile">
                             <i className="fa fa-user-circle"></i>
                             {userData?.firstName}
                         </NavLink>
@@ -42,14 +42,15 @@ function Menu () {
                             <i className="fa fa-sign-out"></i>
                             Sign Out
                         </NavLink> 
-                    </>
+                    </>    
                     ) :(
+                        
                         <NavLink className="main-nav-item" to="/login">
                             <i className="fa fa-user-circle"></i>
-                                Sign In
+                            Sign In
                          </NavLink>
                     )}
-                </div>                
+                </div>         
             </nav>
         </header>
     )
