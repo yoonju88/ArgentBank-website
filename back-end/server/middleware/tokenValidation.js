@@ -14,12 +14,14 @@ module.exports.validateToken = (req, res, next) => {
       userToken,
       process.env.SECRET_KEY || 'default-secret-key'
     )
+    req.user =decodedToken
     return next()
   } catch (error) {
     console.error('Error in tokenValidation.js', error)
     response.status = 401
     response.message = error.message
+    //Send the error response to client
+    return res.status(response.status).send(response)
   }
-
-  return res.status(response.status).send(response)
+ 
 }
