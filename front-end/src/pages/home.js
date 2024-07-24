@@ -1,6 +1,6 @@
 import React from "react"
-import { featureList } from "../content/data/featureList"
-import FeatureItem from "../content/FeatureItem";
+import { featureList } from "../containers/data/featureList"
+import FeatureItem from "../components/FeatureItem";
 
 function Home () {
     return (

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { userLogin, updateUserProfile } from '../helpers/api'
+import { userLogin, updateUserProfile } from '../api/api'
 
 const initialState = {
     user:  {},//set itnitial userdata from local storage 

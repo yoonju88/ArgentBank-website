@@ -1,10 +1,10 @@
 import React, {useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { userLogin, userProfile} from '../helpers/api';
+import { userLogin, userProfile} from '../api/api';
 import { useNavigate } from 'react-router-dom';
 import { loginUserStart, loginUserFailure, loginUserSuccess } from '../store/authSlice';
-import Button from './Button' 
-import Field from './Field';
+import Button from '../components/Button' 
+import Field from '../components/Field';
 
 
 function Login() {
@@ -21,9 +21,8 @@ function Login() {
         if (userLogin.fulfilled.match(resultAction)) {
             const { token } = resultAction.payload.body
             localStorage.setItem('userToken', token)
-            console.log("save token", token)
-            //request profil data
-            const receptionProfile = await userProfile(token)
+            //console.log("save token", token)
+            const receptionProfile = await userProfile(token) //request profil data
             const userData = receptionProfile.body
             //save user data
             dispatch(loginUserSuccess({

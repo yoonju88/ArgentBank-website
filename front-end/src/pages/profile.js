@@ -1,12 +1,12 @@
 import { useSelector, useDispatch } from "react-redux";
-import AccountItem from "../content/Account";
-import { accountList } from "../content/data/accountList"
+import AccountItem from "../components/Account";
+import { accountList } from "../containers/data/accountList"
 import Button from "../components/Button";
 import { useState, useEffect } from "react";
 import Field from "../components/Field";
-import Modal from "../content/modal"
+import Modal from "../containers/modal"
 import { updateUserFailure } from '../store/authSlice'
-import { updateUserProfile } from '../helpers/api'
+import { updateUserProfile } from '../api/api'
 
 function Profile() {
     const dispatch = useDispatch()

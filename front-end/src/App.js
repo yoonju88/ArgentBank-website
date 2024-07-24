@@ -1,13 +1,13 @@
 import "./main.css"
 import { Routes, Route, useLocation } from 'react-router-dom';
 import React, { useEffect } from 'react'
-import Menu from './components/Menu'
+import Menu from './containers/Menu'
 import Home from './pages/home'
 import SignIn from './pages/signIn'
 import Profile from './pages/profile'
 import { useDispatch } from "react-redux";
 import { loginUserSuccess } from "./store/authSlice";
-import { userProfile } from "./helpers/api";
+import { userProfile } from "./api/api";
 
 function App() {
   const dispatch = useDispatch()
