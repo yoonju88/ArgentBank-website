@@ -7,11 +7,11 @@ import { logoutUser } from '../store/authSlice';
 function Menu () {
     const dispatch = useDispatch()
     const {user, token} = useSelector((state)=> state.auth)
-    const [userData, setUserData]= useState(null)
-
+    const [firstName, setFirstName] = useState(null)
+   
     useEffect (() => {
-        if (user&& token) {
-            setUserData(user)
+        if (user && token) {
+            setFirstName(user.firstName);
         }
     }, [user, token])
 
@@ -19,7 +19,7 @@ function Menu () {
         localStorage.removeItem('userToken')  
         dispatch(logoutUser())   // update Redux state : remove userdata and token
     }
-  
+    
     return (
         <header>
             <nav className="main-nav">
@@ -36,7 +36,7 @@ function Menu () {
                     <>
                         <NavLink className="main-nav-item " to="/profile">
                             <i className="fa fa-user-circle"></i>
-                            {userData?.firstName}
+                            { user.userName? user.userName : firstName}
                         </NavLink>
                         <NavLink className="main-nav-item" to="/" onClick={handleLogOut}>
                             <i className="fa fa-sign-out"></i>

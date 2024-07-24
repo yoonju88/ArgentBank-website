@@ -14,10 +14,10 @@ export const userLogin = createAsyncThunk(
                     headers: {
                         'Accept': `application/json`,
                         'Content-Type': 'application/json'
-                    }
+                    },
                 }
             )
-            return response.data                     
+            return response.data
         } catch (error) {
             if (error.response) {
                 console.log('error response data:', error.response.data)
@@ -33,37 +33,42 @@ export const userLogin = createAsyncThunk(
 export const userProfile = async (token) => {
     try {
         const response = await axios.post(
-            `${baseUrl}/user/profile`, 
+            `${baseUrl}/user/profile`,
             {},
             {
                 headers: {
                     'Authorization': `Bearer ${token}`,
-                    'Content-Type' : 'application/json'
+                    'Content-Type': 'application/json'
                 }
             })
-            return response.data
-        }catch (error) {
-            console.log('Error posting user profile', error)
-            throw error
-        }
-}
-/*
-export const signup = async (email, password, firstName, lastName, userName) => {
-    try {
-        const response = await axios.post(`${baseUrl}/user/signup`, {
-            email,
-            password,
-            firstName,
-            lastName,
-            userName,
-        }, {
-            header : {
-                'Content-Type' : 'application/json'
-            }
-        })
-        return response.data;
+        return response.data
     } catch (error) {
-        throw error;
+        console.log('Error posting user profile', error)
+        throw error
     }
 }
-*/
+
+export const updateUserProfile = createAsyncThunk(
+    'auth/updateUserName',
+    async ({ newUserName, token }, { rejectWithValue }) => {
+        try {
+            const response = await axios.put(
+                `${baseUrl}/user/profile`,
+                { userName: newUserName },
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                })
+            //console.log('reception new data', response.data)
+            return response.data.body // re-send the user data with new userName
+        } catch (error) {
+            console.error('API request failed:', error.response || error.message);
+            return rejectWithValue(error.response.data)
+        }
+    }
+)
+
+
