@@ -11,24 +11,25 @@ import { userProfile } from "./helpers/api";
 
 function App() {
   const dispatch = useDispatch()
-  const location = useLocation()
-  const currentPage = location.pathname;
+  const location = useLocation() // which page user is currently on 
+  const currentPage = location.pathname; //console.log('currentpage:', currentPage)
 
   useEffect(() => {
-    const token = localStorage.getItem('userToken')
-    if (token) {
+      const token = localStorage.getItem('userToken')
       const receptionUserProfile = async () => {
+        if (token) {
         try {
-          const receptionProfile = await userProfile(token);
-          const userData = receptionProfile.body
+          const response = await userProfile(token);
+          const userData = response.body
+          //console.log('user info',userData)
           dispatch(loginUserSuccess({ user: userData, token }))
         } catch (error) {
           console.error('Failed to receive user profile', error)
         }
       }
-      receptionUserProfile()
     }
-  }, [dispatch]) // Ensure that the login status is maintained even when navitagint to a new page.
+    receptionUserProfile()
+  }, [dispatch,location]) // Ensure that the login status is maintained even when navitagint to a new page.
 
   return (
     <>
