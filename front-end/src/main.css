@@ -324,6 +324,7 @@ body {
 .header {
   color: #fff;
   margin-bottom: 2rem;
+  padding-top: 2px;
 }
 
 .transaction-button {
