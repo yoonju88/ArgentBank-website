@@ -10,7 +10,18 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+}
+
+html, body {
+  height : 100%;
+  margin:0;
+}
+
+#root {
+  height:100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .main {
@@ -232,12 +243,12 @@ body {
   background-color: white;
   width: 300px;
   margin: 0 auto;
-  margin-top: 3rem;
+  margin-top : 3rem;
   padding: 2rem;
 }
 
 .sign-in-icon {
-  font-size: 5rem;
+  font-size: 1.3rem;
 }
 
 .input-remember {
@@ -269,6 +280,7 @@ body {
   justify-content: center;
   border-top: 2px solid #ccc;
   padding: 2rem 0 1.5rem;
+  padding:30px;
 }
 
 .footer-text {
