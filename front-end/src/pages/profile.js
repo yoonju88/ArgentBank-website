@@ -73,21 +73,25 @@ function Profile() {
                                  <Field
                                     label="Fist Name"
                                     type="text"
-                                    id="text"
+                                    id="firstname"
                                     name="firstname"
+                                    autoComplete= 'null'
                                     placeholder ={user.firstName}   
                                     value={user.firstName}                                 
                                     readOnly
+                                    onChange={(e) => setUserName(e.target.value)}
                                     className="input-non-modi"
                                 />
                                   <Field
                                     label="Last Name"
                                     type="text"
-                                    id="text"
+                                    id="lastname"
                                     name="lastname"
                                     placeholder ={user.lastName}   
                                     value={user.lastName}                                 
                                     readOnly
+                                    autoComplete= 'null'
+                                    onChange={(e) => setUserName(e.target.value)}
                                     className="input-non-modi"
                                 />
                                 <Button className="modal-button" type="submit">Save</Button>

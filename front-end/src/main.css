@@ -159,6 +159,7 @@ html, body {
   border: none;
   background: none;
   font-size: 1rem;
+  transition : transform 0.1s ease;
 }
 .modal-button{
   border-color: #00bc77;
@@ -171,7 +172,12 @@ html, body {
 }
 .close-icon {
   width: 13px;
+  
 }
+.modal-close-button:active  {
+  transform: scale(0.95);
+}
+
 
 @media (min-width: 920px) {
   .hero {
