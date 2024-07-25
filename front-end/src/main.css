@@ -275,6 +275,13 @@ html, body {
   font-size: 1.2rem;
 }
 
+.input-non-modi {
+  pointer-events: none;
+  background-color: rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.4);
+  color: rgba(0,0,0,0.5);
+}
+
 .footer {
   display: flex;
   justify-content: center;

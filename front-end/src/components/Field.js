@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Field = ({ type, id, name,label, autoComplete, value, onChange,required}) => {
+const Field = ({ type, id, name,label, autoComplete, value, onChange,required, className}) => {
     return (
         <>
             <div className="input-wrapper">
@@ -14,6 +14,7 @@ const Field = ({ type, id, name,label, autoComplete, value, onChange,required}) 
                     onChange={onChange}
                     required={required}
                     autoComplete={autoComplete}
+                    className={className}
                 />
             </div>
         </>

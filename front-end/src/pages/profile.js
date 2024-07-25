@@ -58,7 +58,7 @@ function Profile() {
                     onClick={closeModal}
                     Content={
                         <div>
-                            <h1> Edit Name </h1>
+                            <h1> Edit user infos</h1>
                             <form onSubmit={handleSubmit}>
                                 <Field
                                     label="User Name"
@@ -69,6 +69,26 @@ function Profile() {
                                     value={userName}
                                     onChange={(e) => setUserName(e.target.value)}
                                     Required
+                                />
+                                 <Field
+                                    label="Fist Name"
+                                    type="text"
+                                    id="text"
+                                    name="firstname"
+                                    placeholder ={user.firstName}   
+                                    value={user.firstName}                                 
+                                    readOnly
+                                    className="input-non-modi"
+                                />
+                                  <Field
+                                    label="Last Name"
+                                    type="text"
+                                    id="text"
+                                    name="lastname"
+                                    placeholder ={user.lastName}   
+                                    value={user.lastName}                                 
+                                    readOnly
+                                    className="input-non-modi"
                                 />
                                 <Button className="modal-button" type="submit">Save</Button>
                             </form>
