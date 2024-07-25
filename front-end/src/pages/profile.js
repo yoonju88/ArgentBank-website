@@ -7,13 +7,14 @@ import Field from "../components/Field";
 import Modal from "../containers/modal"
 import { updateUserFailure } from '../store/authSlice'
 import { updateUserProfile } from '../api/api'
+import {useNavigate} from 'react-router-dom';
 
 function Profile() {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const { user, token } = useSelector((state) => state.auth);
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [userName, setUserName] = useState('')
-
     const openModal = () => { setIsModalOpen(true) }
     const closeModal = () => { setIsModalOpen(false) }
 
@@ -36,6 +37,12 @@ function Profile() {
             setUserName(user.userName)
         }
     }, [user]) // to maintain newUserName even refresh the page
+
+    useEffect (() => {
+        if (!token) {
+            return navigate('/')
+        }
+    }, [token, navigate])
 
     return (
         <>
