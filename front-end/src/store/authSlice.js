@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { userLogin, updateUserProfile } from '../api/api'
 
+//define the initial state 
 const initialState = {
     user:  {},//set itnitial userdata from local storage 
-    token: localStorage.getItem('userToken') || null, // initial token state with localstorage to verifie an token existe.
+    token: localStorage.getItem('userToken') || null, // Take the token from localstorage to initial token state
     loading: false,
     error: null // for monitoring the registration process. 
 }
@@ -11,10 +12,10 @@ const initialState = {
 const authSlice = createSlice({
     name: 'auth',
     initialState,
-    reducers: {
-        loginUserStart(state) {
+    reducers: {  
+        loginUserStart(state) { 
             state.loading = true;
-            state.error = null;
+            state.error = null; // 
         },
         loginUserSuccess(state, action) {
             state.loading = false;
@@ -44,7 +45,7 @@ const authSlice = createSlice({
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(userLogin.fulfilled, (state, action) => {
+            .addCase(userLogin.fulfilled, (state, action) => { // fulfilled : 'createAsyncThunk' action has been resolved successfully, and the data returned from the API or service is available. 
                 state.loading = false;
                 state.user = action.payload.body // save userData here
                 state.token = action.payload.body.token; // save userToken here
@@ -61,7 +62,7 @@ const authSlice = createSlice({
             })
             .addCase(updateUserProfile.fulfilled, (state, action) => {
                 //console.log('payload:', action.payload)
-                state.user = { ...state.user, ...action.payload } // update user state with new data (userName)
+                state.user = { ...state.user, ...action.payload } //Updates only the userName element of the userData objet
                 state.loading = false;
             })
             .addCase(updateUserProfile.rejected, (state, action) => {
@@ -82,3 +83,12 @@ export const {
 } = authSlice.actions;
 
 export default authSlice.reducer
+
+
+//reducer : a function that takes the current state and action then return to new state. 
+// action.js and reducer has a important element for managing the state changes. 'createSlice' makes managing these association simpler. 
+//payload : represents the data returned from an asynchronous operation or passed along with the action. 
+//       is used to update the Redux state based on the result of the async operation. 
+// state.user = { ...state.user, ...action.payload } : 
+// for updating part of a state object while keeping the existing properties intact(=remaining in its original state ) 
+

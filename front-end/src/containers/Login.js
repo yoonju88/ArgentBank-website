@@ -8,7 +8,7 @@ import Field from '../components/Field';
 
 
 function Login() {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch() // useDispatch provides a straightforward way to dispatch actions from within function components, enabling you to trigger state changes in Redux store 
     const [email, setUserEmail] = useState('')
     const [password, setUserPassword] = useState('')
     const { loading, error } = useSelector((state) => state.auth);
@@ -17,14 +17,15 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         dispatch(loginUserStart());
-        const resultAction = await dispatch(userLogin({ email, password }));
+        const resultAction = await dispatch(userLogin({ email, password })); // send the userLogin with props
+        // check if the dispatched action resultAction matches the fullfiled state of the userLogin async thunk. 
         if (userLogin.fulfilled.match(resultAction)) {
             const { token } = resultAction.payload.body
             localStorage.setItem('userToken', token)
             //console.log("save token", token)
-            const receptionProfile = await userProfile(token) //request profil data
-            const userData = receptionProfile.body
-            //save user data
+            const receptionProfile = await userProfile(token) //request user info by token
+            const userData = receptionProfile.body 
+            //send to server reducer to update login status with userdata and token
             dispatch(loginUserSuccess({
                 user: userData,
                 token

@@ -1,9 +1,6 @@
-import axios from 'axios';
-
+/*import axios from 'axios';
 
 const baseUrl = 'http://localhost:3001/api/v1'
-
-
 export const registerUser = async (email, password) => {
     try {
         const config = {
@@ -11,7 +8,7 @@ export const registerUser = async (email, password) => {
                 'Content-Type': 'application/json',
             },
         }
-        const { data } = await axios.post(
+        const { data } = await axios.post( //Envoie une demande d'API 
             `${baseUrl}/user/login`,
             { email, password },
             config
@@ -25,3 +22,7 @@ export const registerUser = async (email, password) => {
         }
     }
 }
+
+
+// authAction.js managing and dispatching action that modify the Redux state. 
+*/

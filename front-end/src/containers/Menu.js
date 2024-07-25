@@ -6,7 +6,7 @@ import { logoutUser } from '../store/authSlice';
 
 function Menu () {
     const dispatch = useDispatch()
-    const {user, token} = useSelector((state)=> state.auth)
+    const {user, token} = useSelector((state)=> state.auth) // allow to extract data from the Redux store's state.
     const [firstName, setFirstName] = useState(null)
    
     useEffect (() => {
@@ -17,7 +17,7 @@ function Menu () {
 
     const handleLogOut = () => {
         localStorage.removeItem('userToken')  
-        dispatch(logoutUser())   // update Redux state : remove userdata and token
+        dispatch(logoutUser())   // update Redux state : remove userdata and token 
     }
     
     return (
