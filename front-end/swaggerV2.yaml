@@ -1,0 +1,317 @@
+swagger: '2.0'
+info:
+  title: Bank Argent API documentation
+  description: Contains all available API endpoints in this codebase
+  version: '1.0.0'
+  termsOfService: 'http://swagger.io/terms/'
+host: localhost:3001
+basePath: /api/v2
+schemes:
+  - http
+paths:
+  /user/profile:
+    get:  
+      security : 
+        - Bearer: [] 
+      tags:
+        - Transaction
+      summary: Finds transaction for the current month by account
+      description: API to retrive transactions grouped by account for the current month. Only transactions from the current month are returned.
+      operationId: findTransactionByAccount
+      parameters :
+        - in: header
+          name: Authorization
+          description: Attache Bearer JWT token
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses :
+        '200':
+          description: Transaction grouped by account for the current month
+          schema:
+            type: object
+            properties:
+              accounts:
+                type: array
+                items:
+                  $ref: '#/definitions/TransactionResponse'
+        '400':
+          description: Invalid request parameters
+        '500':
+          description: Internal Server Error
+          
+  /user/profile/{transactionId}:
+    get: 
+      security: 
+        - Bearer: []
+      tags:
+        - Transaction
+      summary: Specific group of transaction
+      description: API for fetching a specific group of transaction by transactionId
+      operationId: getTransactionDetails
+      parameters :
+        - in : header
+          name : Authorization
+          description: Attache Bearer JWT token
+          required: true
+          type: string
+          
+        - in: path
+          name: transactionId
+          description: The ID of the transition
+          required: true
+          type: string
+      produces:
+        - application/json
+      responses :
+        '200':
+          description: Transaction detail retrieved successfully
+          schema:
+            items:
+              $ref: '#/definitions/TransactionDetails'
+        '400':
+          description: Invalid request
+        '500':
+          description: Internal Server Error
+          
+    post:
+      security: 
+        - Bearer: []
+      tags:
+        - Transaction
+      summary: Add a new transaction information
+      description: API for adding a transaction information
+      operationId: AddTransactionInformation
+      parameters :
+        - in : header
+          name : Authorization
+          description: Attache Bearer JWT token
+          required: true
+          type: string
+          
+        - in: path
+          name: transactionId
+          description: The ID of the transition
+          required: true
+          type: string
+          
+        - in: body
+          name: body
+          description: add the transaction payload
+          required: true
+          schema: 
+            $ref: '#/definitions/AddTransition'
+      produces :
+        - application/json
+      responses :
+        '200':
+          description: Transaction information added successfully
+          schema:
+            items:
+              $ref: '#/definitions/UpdateTransitionResponse'
+        '400':
+          description: Invalid fields
+        '500':
+          description: Internal Server Error
+    put:
+      security: 
+        - Bearer: []
+      tags:
+        - Transaction
+      summary: Update a transaction detail
+      description: API for editing a transaction detail 
+      operationId: EditTransactionDetails
+      parameters :
+        - in : header
+          name : Authorization
+          description: Attache Bearer JWT token
+          required: true
+          type: string
+          
+        - in: path
+          name: transactionId
+          description: The ID of the transition
+          required: true
+          type: string
+          
+        - in: body
+          name: body
+          description: Update the transaction payload
+          required: true
+          schema: 
+            $ref: '#/definitions/UpdateTransition'
+      produces :
+        - application/json
+      responses :
+        '200':
+          description: Transaction updated successfully
+          schema:
+            items:
+              $ref: '#/definitions/UpdateTransitionResponse'
+        '400':
+          description: Invalid fields
+        '500':
+          description: Internal Server Error
+    delete:
+      security: 
+        - Bearer: []
+      tags:
+        - Transaction
+      summary: delete a transaction detail
+      description: API for removing a transaction detail 
+      operationId: RemoveTransactionDetails
+      parameters :
+        - in : header
+          name : Authorization
+          description: Attache Bearer JWT token
+          required: true
+          type: string
+          
+        - in: path
+          name: transactionId
+          description: The ID of the transition
+          required: true
+          type: string
+          
+        - in: body
+          name: body
+          description: Update the transaction payload
+          required: true
+          schema: 
+            $ref: '#/definitions/DeleteTransition'
+      produces :
+        - application/json
+      responses :
+        '200':
+          description: Transaction updated successfully
+          schema:
+            items:
+              $ref: '#/definitions/UpdateTransitionResponse'
+        '400':
+          description: Invalid fields
+        '500':
+          description: Internal Server Error
+    
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+    
+definitions:
+  TransactionResponse:
+    type: object
+    properties:
+      accountId:
+        type: string
+        description: Account ID
+      transactions:
+        items:
+          type: object
+          properties:
+            id:
+              type: string
+              description: Transaction ID
+            date:
+              type: string
+              format: date
+              description: Transaction date
+            amount:
+              type: number
+              format: double
+              description: Transaction amount
+            nom:
+              type: string
+              description: Account name
+            description:
+              type: string
+              description: Transaction description
+    required:
+      - accountId
+      - transactions
+        
+  TransactionDetails:
+    type: object
+    properties:
+      id:
+        type: string
+        description: transaction id
+      date:
+        type: string
+        format : date
+        description: transaction date
+      description:
+        type: string
+        description: transaction detail description ('Golden Sun Bakery')
+      amount: 
+        type: number
+        format: double
+        description: transaction amount in USD
+      balance:
+        type: number
+        format: double
+        description: transaction balance in USD
+      type: 
+        type: string
+        description: transaction type
+      category:
+        type: string
+        description: transaction category
+      note:
+        type: string
+        description: transaction note
+    required:
+      - date
+      - description
+      - amount
+      - balance
+      
+  AddTransition:
+    type: object
+    properties:
+      transaction type:
+        type: string
+        description: transaction type
+      category:
+        type: string
+        description: transaction category
+      note:
+        type: string
+        description : transaction note
+ 
+  UpdateTransitionResponse:
+    type: object
+    properties:
+      status:
+        type: integer
+      message:  
+        type: string
+      body: 
+        type: string
+  
+  UpdateTransition : 
+    type: object
+    properties :
+      transition type: 
+        type: string
+        description: transition type
+      category :
+        type: string
+        description: transition category 
+      note : 
+        type: string
+        description: transition note
+      
+  DeleteTransition : 
+    type: object
+    properties :
+      transition type: 
+        type: string
+        description: transition type
+      category :
+        type: string
+        description: transition category 
+      note : 
+        type: string
+        description: transition note
