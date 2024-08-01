@@ -5,8 +5,8 @@ import Button from "../components/Button";
 import { useState, useEffect } from "react";
 import Field from "../components/Field";
 import Modal from "../containers/modal"
-import { updateUserFailure } from '../store/authSlice'
-import { updateUserProfile } from '../api/api'
+import { updateUserFailure } from '../redux/authSlice'
+import { updateUserProfile } from '../redux/api'
 import {useNavigate} from 'react-router-dom';
 
 function Profile() {

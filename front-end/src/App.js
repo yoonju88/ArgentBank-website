@@ -7,8 +7,8 @@ import SignIn from './pages/signIn'
 import Profile from './pages/profile'
 import ErrorPage from './pages/error'
 import { useDispatch } from "react-redux";
-import { loginUserSuccess } from "./store/authSlice";
-import { userProfile } from "./api/api";
+import { loginUserSuccess } from "./redux/authSlice";
+import { userProfile } from "./redux/api";
 
 function App() {
   const dispatch = useDispatch()

@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react'
 import logo from '../img/argentBankLogo.webp';
 import {NavLink} from 'react-router-dom';
 import { useDispatch, useSelector} from "react-redux";
-import { logoutUser } from '../store/authSlice';
+import { logoutUser } from '../redux/authSlice';
 
 function Menu () {
     const dispatch = useDispatch()

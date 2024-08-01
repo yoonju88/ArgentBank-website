@@ -1,8 +1,8 @@
 import React, {useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { userLogin, userProfile} from '../api/api';
+import { userLogin, userProfile} from '../redux/api';
 import { useNavigate } from 'react-router-dom';
-import { loginUserStart, loginUserFailure, loginUserSuccess } from '../store/authSlice';
+import { loginUserStart, loginUserFailure, loginUserSuccess } from '../redux/authSlice';
 import Button from '../components/Button' 
 import Field from '../components/Field';
 
