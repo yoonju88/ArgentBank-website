@@ -40,7 +40,7 @@ function Profile() {
 
     useEffect (() => {
         if (!token) {
-            return navigate('/error')
+            return navigate('/login')
         }
     }, [token, navigate])
 
