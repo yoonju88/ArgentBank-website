@@ -5,6 +5,7 @@ import Menu from './containers/Menu'
 import Home from './pages/home'
 import SignIn from './pages/signIn'
 import Profile from './pages/profile'
+import ErrorPage from './pages/error'
 import { useDispatch } from "react-redux";
 import { loginUserSuccess } from "./store/authSlice";
 import { userProfile } from "./api/api";
@@ -34,11 +35,12 @@ function App() {
   return (
     <>
       <Menu />
-      <main className={`${currentPage === '/' ? " " : " bg-dark"} main`}>
+      <main className={`${currentPage === '/' || '/error' ? " " : " bg-dark"} main`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<SignIn />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="*" element={<ErrorPage/>} />
         </Routes>
       </main>
       <footer className="footer">
