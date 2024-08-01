@@ -35,7 +35,7 @@ function App() {
   return (
     <>
       <Menu />
-      <main className={`${currentPage === '/' || '/error' ? " " : " bg-dark"} main`}>
+      <main className={`${currentPage === '/' || currentPage === '/error' ? " " : " bg-dark"} main`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<SignIn />} />
