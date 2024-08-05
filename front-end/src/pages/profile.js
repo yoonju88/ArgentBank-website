@@ -24,7 +24,8 @@ function Profile() {
         //console.log("resultAction: ", resultAction)
         //console.log ("profileupdate:", resultAction.payload)
         if (updateUserProfile.fulfilled.match(resultAction)) {
-            //console.log('Profile update succeeded:', resultAction.payload)     
+            //console.log('Profile update succeeded:', resultAction.payload)   
+            return  
         } else {
             dispatch(updateUserFailure(resultAction.payload))
             //console.error('Profile update failed:', resultAction.payload)
