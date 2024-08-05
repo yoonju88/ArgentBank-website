@@ -102,19 +102,18 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /transactions:
+  /accounts:     
     get:  
       security : 
         - Bearer: [] 
       tags:
         - Transaction
-      summary: Finds transaction for the current month by account
-      description: API to retrive transactions grouped by account for the current month. Only transactions from the current month are returned.
-      operationId: findTransactionByAccount
+      summary: Retrieve all transactions for the current month, grouped by account
+      description: API to retrive transactions grouped by account for the current month.
       parameters :
         - in: header
           name: Authorization
-          description: Attache Bearer JWT token
+          description: Attach Bearer JWT token
           required: true
           type: string
       produces:
@@ -134,19 +133,18 @@ paths:
         '500':
           description: Internal Server Error
           
-  /transactions/{transactionId}:
+  /accounts/{accountId}:
     get: 
       security: 
         - Bearer: []
       tags:
         - Transaction
-      summary: Specific group of transaction
-      description: API for fetching a specific group of transaction by transactionId
-      operationId: getTransactionDetails
+      summary: View the details of a single transaction
+      description: API for fetching the detail of transaction by its accountId
       parameters :
         - in: path
-          name: transactionId
-          description: The ID of the transition
+          name: accountId
+          description: The ID of the account
           required: true
           type: string
       produces:
@@ -158,20 +156,22 @@ paths:
               $ref: '#/definitions/TransactionDetails'
         '400':
           description: Invalid request
+        '404':
+          description: Not Found
         '500':
           description: Internal Server Error
+  /accounts/{accountId}/transaction :      
     post:
       security: 
         - Bearer: []
       tags:
         - Transaction
-      summary: Add a new transaction note
-      description: API for adding a transaction note
-      operationId: AddTransactionInformation
+      summary: Add a new note to a transition
+      description: API for adding a new note
       parameters :
         - in: path
-          name: transactionId
-          description: The ID of the transaction
+          name: accountId
+          description: The ID of the account
           required: true
           type: string
           
@@ -180,12 +180,12 @@ paths:
           description: add the transaction payload
           required: true
           schema: 
-            $ref: '#/definitions/AddTransition'
-      produces :
+            $ref: '#/definitions/AddTransitionNote'
+      produces:
         - application/json
       responses :
         '200':
-          description: Transaction note information added successfully
+          description: New note has been successfully added
           schema:
               $ref: '#/definitions/UpdateTransitionResponse'
         '400':
@@ -197,13 +197,12 @@ paths:
         - Bearer: []
       tags:
         - Transaction
-      summary: Update a transaction category
-      description: API for editing a transaction category
-      operationId: EditTransactionDetails
+      summary: Update category on a transaction
+      description: API for editing category on trasaction by its ID
       parameters :
         - in: path
-          name: transactionId
-          description: The ID of the transaction
+          name: accountId
+          description: The ID of the account
           required: true
           type: string
           
@@ -219,42 +218,40 @@ paths:
         '200':
           description: Transaction category updated successfully
           schema:
-              $ref: '#/definitions/UpdateTransitionResponse'
+            $ref: '#/definitions/UpdateTransitionResponse'
         '400':
           description: Invalid fields
         '500':
           description: Internal Server Error
+  /accounts/{accountId}/transaction/{noteId}:
     delete:
       security: 
         - Bearer: []
       tags:
         - Transaction
-      summary: delete a transaction information
-      description: API for removing a transaction information 
-      operationId: RemoveTransactionInformation
+      summary: Delete information on a transaction
+      description: API for removing information on transaction by its ID 
       parameters :
         - in: path
-          name: transactionId
-          description: The ID of the transition
+          name: accountId
+          description: The ID of the account
           required: true
           type: string
           
-        - in: body
-          name: body
-          description: Update the transaction payload
+        - in: path
+          name: noteId
+          description: The ID of the transaction note to be deleted
           required: true
-          schema: 
-            $ref: '#/definitions/DeleteTransition'
+          type: string
       produces :
         - application/json
       responses :
         '200':
           description: Transaction information deleted successfully
           schema:
-            items:
-              $ref: '#/definitions/UpdateTransitionResponse'
+              $ref: '#/definitions/DeleteTransitionResponse'
         '400':
-          description: Invalid fields
+          description: Invalid request parameters
         '500':
           description: Internal Server Error
          
@@ -320,38 +317,31 @@ definitions:
     properties:
       accountId:
         type: string
-        description: Account ID
       transactions:
+        type: array
         items:
           type: object
           properties:
-            id:
+            transactionId:
               type: string
-              description: Transaction ID
             date:
               type: string
               format: date
-              description: Transaction date
             amount:
               type: number
               format: double
-              description: Transaction amount
-            nom:
+            name:
               type: string
-              description: Account name
             description:
               type: string
-              description: Transaction description
   TransactionDetails:
     type: object
     properties:
-      id:
+      transactionId:
         type: string
-        description: transaction id
       date:
         type: string
         format : date
-        description: transaction date
       description:
         type: string
         description: transaction detail description ('Golden Sun Bakery')
@@ -370,59 +360,74 @@ definitions:
         type: string
         description: transaction category
       note:
-        type: string
+        type: object
         description: transaction note
-    required:
-      - date
-      - description
-      - amount
-      - balance
-      
-  AddTransition:
+        properties:
+          noteId:
+            type: string
+          content: 
+            type: string
+
+  AddTransitionNote:
     type: object
     properties:
-      note:
+      transitionId:
         type: string
- 
+      note:
+        type: object
+        properties:
+          noteId:
+            type: string
+          content: 
+            type: string
+        
   UpdateTransitionResponse:
     type: object
     properties:
       status:
-        type: integer
+        type: boolean
+        description: Indicates if the operation was successful.
       message:  
         type: string
-      body:
+        description: A message providing the detail about the result.
+        example : 
+      transaction:
         type: object
         properties:
-          id:
-            type: string
-          note:
+          transactionId:
             type: string
           category:
             type: string
-  UpdateTransition : 
+          note:
+            type: object
+            properties:
+              noteId:
+                type: string
+              content: 
+                type: string
+            
+  UpdateTransition: 
     type: object
     properties :
-      transition type: 
+      transitionId:
         type: string
-        description: transition type
       category :
         type: string
-        description: transition category 
-      note : 
-        type: string
-        description: transition note
+        enum: 
+          - "Food"
+          - "Transportation"
+          - "Healthcare"
+          - "Entertainment"
+          - "Other"
       
-  DeleteTransition : 
+  DeleteTransitionResponse:
     type: object
-    properties :
-      transition type: 
+    properties:
+      status:
+        type: boolean
+        description: Indicates if the operation was successful.
+      message:
         type: string
-        description: transition type
-      category :
-        type: string
-        description: transition category 
-      note : 
-        type: string
-        description: transition note
+        description: A message providing details about the result of the deletion.
+        example: "The note was succefully deleted"
   
