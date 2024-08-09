@@ -4,8 +4,8 @@ import React, { useEffect } from 'react'
 import Menu from './containers/Menu'
 import Home from './pages/home'
 import SignIn from './pages/signIn'
-import Profile from './pages/Error'
-import ErrorPage from './pages/Error'
+import Profile from './pages/profile'
+import ErrorPage from './pages/ErrorPage'
 import ErrorAll from "./components/errorAll";
 import { useDispatch } from "react-redux";
 import { loginUserSuccess } from "./redux/authSlice";
