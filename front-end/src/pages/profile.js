@@ -25,12 +25,12 @@ function Profile() {
         //console.log ("profileupdate:", resultAction.payload)
         if (updateUserProfile.fulfilled.match(resultAction)) {
             //console.log('Profile update succeeded:', resultAction.payload)   
-            return  
+            closeModal()
         } else {
             dispatch(updateUserFailure(resultAction.payload))
             //console.error('Profile update failed:', resultAction.payload)
         }
-        setIsModalOpen(false)
+        
     }
 
     useEffect(() => { 
@@ -69,7 +69,7 @@ function Profile() {
                                     autoComplete="on"
                                     value={userName}
                                     onChange={(e) => setUserName(e.target.value)}
-                                    Required
+                                    required
                                 />
                                  <Field
                                     label="Fist Name"

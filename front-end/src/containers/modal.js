@@ -4,8 +4,13 @@ import closeIcon from '../img/close-icon.webp'
 
 
 const Modal = ({Content, onClick}) => {
+    const handleOverlayClick = (e) => {
+        if (e.target=== e.currentTarget) {
+            onClick()
+        }
+    };
     return (
-        <div className='modal-overlay'>
+        <div className='modal-overlay' onClick ={handleOverlayClick}>
             <div className='modal-content' onClick ={(e)=> e.stopPropagation()}>
                 {Content}
                 <button className="modal-close-button" onClick={onClick}>
@@ -15,7 +20,6 @@ const Modal = ({Content, onClick}) => {
         </div>
     )
 }
-
 Modal.propTypes = {
     Content: PropTypes.node.isRequired,
     onClick: PropTypes.func.isRequired,
