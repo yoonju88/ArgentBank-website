@@ -4,11 +4,13 @@ import React, { useEffect } from 'react'
 import Menu from './containers/Menu'
 import Home from './pages/home'
 import SignIn from './pages/signIn'
-import Profile from './pages/profile'
-import ErrorPage from './pages/error'
+import Profile from './pages/Error'
+import ErrorPage from './pages/Error'
+import ErrorAll from "./components/errorAll";
 import { useDispatch } from "react-redux";
 import { loginUserSuccess } from "./redux/authSlice";
 import { userProfile } from "./redux/api";
+
 
 function App() {
   const dispatch = useDispatch()
@@ -40,7 +42,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<SignIn />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="*" element={<ErrorPage/>} />
+          <Route path="/error" element={<ErrorPage />} />
+          <Route path="*" element={<ErrorAll />} />
         </Routes>
       </main>
       <footer className="footer">
