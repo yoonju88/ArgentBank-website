@@ -2,11 +2,7 @@ import PropTypes from "prop-types"
 import React from "react"
 import closeIcon from '../img/close-icon.webp'
 import Button from "../components/Button"
-/*
-<button className="modal-close-button" onClick={onClick}>
-        <img className="close-icon" src={closeIcon} alt="close icon"/>
-</button>
-*/
+
 const Modal = ({Content, onClick}) => {
     const handleOverlayClick = (e) => {
         if (e.target=== e.currentTarget) {
