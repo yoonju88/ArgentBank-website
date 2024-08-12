@@ -32,7 +32,7 @@ function App() {
       }
     }
     receptionUserProfile()
-  }, [dispatch,location]) // Ensure that the login status is maintained even when navitagint to a new page.
+  }, [dispatch]) // Ensure that the login status is maintained even when navitagint to a new page.
 
   return (
     <>
