@@ -37,7 +37,7 @@ function Profile() {
             setUserName(user.userName)
         }
     }, [user]) // to maintain newUserName even refresh the page
-
+    
     useEffect (() => {
         if (!token) {
             return navigate('/login')
@@ -68,7 +68,6 @@ function Profile() {
                                     autoComplete="on"
                                     value={userName}
                                     onChange={(e) => setUserName(e.target.value)}
-                                    required
                                 />
                                  <Field
                                     label="Fist Name"
