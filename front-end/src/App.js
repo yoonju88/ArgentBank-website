@@ -42,7 +42,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<SignIn />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/error" element={<ErrorPage />} />
+          <Route path="/404" element={<ErrorPage />} />
           <Route path="*" element={<ErrorAll />} />
         </Routes>
       </main>

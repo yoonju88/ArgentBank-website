@@ -6,7 +6,7 @@ function ErrorAll () {
     const navigate = useNavigate()
 
     useEffect(() => {      
-           navigate("/error")
+           navigate("/404")
     }, [navigate])
 
     return(
