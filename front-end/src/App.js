@@ -18,7 +18,7 @@ function App() {
   const currentPage = location.pathname; //console.log('currentpage:', currentPage)  
   const token = localStorage.getItem('userToken')
   const storedUser = localStorage.getItem('user')
-  
+
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
@@ -40,7 +40,7 @@ function App() {
   return (
     <>
       <Menu />
-      <main className={`${currentPage === '/' || currentPage === '/error' ? " " : " bg-dark"} main`}>
+      <main className={`${currentPage === '/' || currentPage === '/404' ? " " : " bg-dark"} main`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<SignIn />} />
