@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import { useState, useEffect } from "react";
 import Field from "../components/Field";
 import Modal from "../containers/modal"
-import { updateUserFailure } from '../redux/authSlice'
+import { updateUserFailure, loginUserSuccess } from '../redux/authSlice'
 import { updateUserProfile } from '../redux/api'
 import {useNavigate} from 'react-router-dom';
 
@@ -21,16 +21,15 @@ function Profile() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const resultAction = await dispatch(updateUserProfile({ newUserName: userName, token }))
-        //console.log("resultAction: ", resultAction)
-        //console.log ("profileupdate:", resultAction.payload)
         if (updateUserProfile.fulfilled.match(resultAction)) {
-            //console.log('Profile update succeeded:', resultAction.payload)   
+            const updatedUser = { ...user, userName: userName };
+            dispatch(loginUserSuccess({ user: updatedUser, token }));
+            localStorage.setItem('user', JSON.stringify(updatedUser));
             closeModal()
         } else {
             dispatch(updateUserFailure(resultAction.payload))
-            //console.error('Profile update failed:', resultAction.payload)
+            console.error('Profile update failed:', resultAction.payload);
         }
-        
     }
 
     useEffect(() => { 

@@ -15,24 +15,27 @@ import { userProfile } from "./redux/api";
 function App() {
   const dispatch = useDispatch()
   const location = useLocation() // which page user is currently on 
-  const currentPage = location.pathname; //console.log('currentpage:', currentPage)
-
+  const currentPage = location.pathname; //console.log('currentpage:', currentPage)  
+  const token = localStorage.getItem('userToken')
+  const storedUser = localStorage.getItem('user')
+  
   useEffect(() => {
-      const token = localStorage.getItem('userToken')
-      const receptionUserProfile = async () => {
-        if (token) {
-        try {
+    const fetchUserProfile = async () => {
+      try {
+        // if sotredUser data doesn't exist, fetch user profil from server
+        if (!storedUser && token) {
           const response = await userProfile(token);
           const userData = response.body
-          //console.log('user info',userData)
           dispatch(loginUserSuccess({ user: userData, token }))
-        } catch (error) {
-          console.error('Failed to receive user profile', error)
+        } else if (storedUser && token) {
+          dispatch(loginUserSuccess({ user: JSON.parse(storedUser), token }));
         }
-      }
+      } catch (error) {
+        console.error('Failed to receive user profile', error)
+      } 
     }
-    receptionUserProfile()
-  }, [dispatch]) // Ensure that the login status is maintained even when navitagint to a new page.
+    fetchUserProfile()
+  }, [dispatch, storedUser, token]) // Ensure that the login status is maintained even when navitagint to a new page.
 
   return (
     <>
