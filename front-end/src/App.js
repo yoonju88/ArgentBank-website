@@ -29,7 +29,8 @@ function App() {
           const userData = response.body
           dispatch(loginUserSuccess({ user: userData, token }))
         } else if (storedUser) {
-          dispatch(loginUserSuccess({ user: JSON.parse(storedUser), token })); // parse : used to convert a JSON string into a JavaScript object
+          const userData = JSON.parse(storedUser)
+          dispatch(loginUserSuccess({ user: userData , token })); // parse : used to convert a JSON string into a JavaScript object
         }
       } catch (error) {
         console.error('Failed to receive user profile', error)
