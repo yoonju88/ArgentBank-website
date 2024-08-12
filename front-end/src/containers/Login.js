@@ -17,16 +17,14 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault();
         dispatch(loginUserStart());
-        const resultAction = await dispatch(userLogin({ email, password })); // send the userLogin with props
-        // check if the dispatched action resultAction matches the fullfiled state of the userLogin async thunk. 
-        if (userLogin.fulfilled.match(resultAction)) {
+        const resultAction = await dispatch(userLogin({ email, password })); // send the userLogin with props 
+        if (userLogin.fulfilled.match(resultAction)) { // check if the dispatched action resultAction matches the fullfiled state of the userLogin async thunk.
             const { token } = resultAction.payload.body
             localStorage.setItem('userToken', token)
             //console.log("save token", token)
-            const receptionProfile = await userProfile(token) //request user info by token
-            const userData = receptionProfile.body 
-            //send to server reducer to update login status with userdata and token
-            dispatch(loginUserSuccess({
+            const fetchProfile = await userProfile(token) //request user info by token
+            const userData = fetchProfile.body 
+            dispatch(loginUserSuccess({ //send to server reducer to update login status with userdata and token
                 user: userData,
                 token
             }))

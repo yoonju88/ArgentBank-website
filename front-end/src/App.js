@@ -21,14 +21,15 @@ function App() {
 
   useEffect(() => {
     const fetchUserProfile = async () => {
+      if (!token) return 
       try {
-        // if sotredUser data doesn't exist, fetch user profil from server
-        if (!storedUser && token) {
+        if (!storedUser) {
+          // if sotredUser doesn't exist, fetching from server
           const response = await userProfile(token);
           const userData = response.body
           dispatch(loginUserSuccess({ user: userData, token }))
-        } else if (storedUser && token) {
-          dispatch(loginUserSuccess({ user: JSON.parse(storedUser), token }));
+        } else if (storedUser) {
+          dispatch(loginUserSuccess({ user: JSON.parse(storedUser), token })); // parse : used to convert a JSON string into a JavaScript object
         }
       } catch (error) {
         console.error('Failed to receive user profile', error)
