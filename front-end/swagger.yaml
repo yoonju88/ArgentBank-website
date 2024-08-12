@@ -9,7 +9,7 @@ basePath: /api/v2
 schemes:
   - http
 paths:
-  /account/{accountId}:     
+  /user/profile/{accountId}/transactions:     
     get:  
       security : 
         - Bearer: [] 
@@ -23,7 +23,6 @@ paths:
           description: Attach Bearer JWT token
           required: true
           type: string
-          
         - in: path
           name: accountId
           description: The ID of the account
@@ -33,22 +32,22 @@ paths:
         - application/json
       responses :
         '200':
-          description: Transaction grouped by account for the current month
+          description: Transaction grouped by account for the current month were successfully retrieved.
           schema:
             $ref: '#/definitions/ListOfTransactionsResponse'
         '400':
-          description: Invalid field
+          description: The field is invalid.
           schema:
-            $ref: '#/definitions/ListOfTransInvalidField'
+            $ref: '#/definitions/InvalidField'
         '401':
-          description: Unauthorized
+          description: The request lacks valid authentication credentials. Check the "Authorization" header.
           schema:
             $ref: '#/definitions/ErrorAuthorized'
         '404':
-          description: Not Found
+          description: The requested resource was not found.
           schema:
             $ref: '#/definitions/ErrorNotFound'
-  /transactions/{transactionId}:
+  /user/profile/{accountId}/transactions/{transactionId}:
     get: 
       security: 
         - Bearer: []
@@ -62,7 +61,11 @@ paths:
           description: Attach Bearer JWT token
           required: true
           type: string
-          
+        - in: path
+          name: accountId
+          description: The ID of the account
+          required: true
+          type: string          
         - in: path
           name: transactionId
           description: The ID of the transaction
@@ -72,19 +75,19 @@ paths:
         - application/json
       responses :
         '200':
-          description: Transaction detail retrieved successfully
+          description: The transaction details were successfully retrieved.
           schema:
               $ref: '#/definitions/TransactionDetails'
         '400':
-          description: Invalid field
+          description: The field is invalid.
           schema:
-            $ref: '#/definitions/InvalidField'
+            $ref: '#/definitions/InvalidField2Id'
         '401':
-          description: Unauthorized
+          description: The request lacks valid authentication credentials. Check the "Authorization" header.
           schema:
               $ref: '#/definitions/ErrorAuthorized'
         '404':
-          description: Not Found
+          description: The requested resource was not found.
           schema:
               $ref: '#/definitions/ErrorNotFound'
     put:
@@ -100,13 +103,16 @@ paths:
           description: Attach Bearer JWT token
           required: true
           type: string
-          
+        - in: path
+          name: accountId
+          description: The ID of the account
+          required: true
+          type: string          
         - in: path
           name: transactionId
           description: The ID of the transaction
           required: true
-          type: string
-          
+          type: string          
         - in: body
           name: body
           description: Update the transaction payload
@@ -117,22 +123,22 @@ paths:
         - application/json
       responses :
         '200':
-          description: Transaction category updated successfully
+          description: The category was successfully updated.
           schema:
             $ref: '#/definitions/UpdateTransCategoryResponse'
         '400':
-          description: Invalid field
+          description: The field is invalid.
           schema:
-            $ref: '#/definitions/InvalidField'
+            $ref: '#/definitions/InvalidField2Id'
         '401':
-          description: Unauthorized
+          description: The request lacks valid authentication credentials. Check the "Authorization" header.
           schema:
               $ref: '#/definitions/ErrorAuthorized'
         '404':
-          description: Not Found
+          description: The requested resource was not found.
           schema:
               $ref: '#/definitions/ErrorNotFound'
-  /transaction/{transactionId}/note :      
+  /user/profile/{accountId}/transactions/{transactionId}/notes :      
     post:
       security: 
         - Bearer: []
@@ -146,13 +152,16 @@ paths:
           description: Attach Bearer JWT token
           required: true
           type: string
-          
+        - in: path
+          name: accountId
+          description: The ID of the account
+          required: true
+          type: string 
         - in: path
           name: transactionId
           description: The ID of the transaction
           required: true
           type: string
-          
         - in: body
           name: body
           description: add the transaction payload
@@ -162,23 +171,23 @@ paths:
       produces:
         - application/json
       responses :
-        '200':
-          description: New note has been successfully added
+        '201':
+          description: New note was successfully added.
           schema:
               $ref: '#/definitions/AddTransactaconNoteResponse'
         '400':
-          description: Invalid fields
+          description: The field is invalid.
           schema:
-              $ref: '#/definitions/InvalidField'
+              $ref: '#/definitions/InvalidField2Id'
         '401':
-          description: Unauthorized
+          description: The request lacks valid authentication credentials. Check the "Authorization" header.
           schema:
               $ref: '#/definitions/ErrorAuthorized'
         '404':
-          description: Not Found
+          description: The requested resource was not found.
           schema:
               $ref: '#/definitions/ErrorNotFound'
-  /transaction/{transactionId}/note/{noteId}:
+  /user/profile/{accountId}/transactions/{transactionId}/notes/{noteId}:
     put:
       security: 
         - Bearer: []
@@ -192,19 +201,21 @@ paths:
           description: Attach Bearer JWT token
           required: true
           type: string
-          
+        - in: path
+          name: accountId
+          description: The ID of the account
+          required: true
+          type: string 
         - in: path
           name: transactionId
           description: The ID of the transaction
           required: true
           type: string
-          
         - in: path
           name: noteId
-          description: The ID of the transaction note to be deleted
+          description: The ID of the transaction note to be updated
           required: true
           type: string
-          
         - in: body
           name: body
           description: Update the transaction payload
@@ -215,19 +226,19 @@ paths:
         - application/json
       responses :
         '200':
-          description: Transaction category updated successfully
+          description: The note was successfully updated.
           schema:
             $ref: '#/definitions/UpdateTransNoteResponse'
         '400':
-          description: Invalid field
+          description: The field is invalid.
           schema:
-            $ref: '#/definitions/InvalidFieldFor2Ids'
+            $ref: '#/definitions/InvalidField3Id'
         '401':
-          description: Unauthorized
+          description: The request lacks valid authentication credentials. Check the "Authorization" header.
           schema:
               $ref: '#/definitions/ErrorAuthorized'
         '404':
-          description: Not Found
+          description: The requested resource was not found.
           schema:
               $ref: '#/definitions/ErrorNotFound'
     delete:
@@ -235,12 +246,17 @@ paths:
         - Bearer: []
       tags:
         - Transaction
-      summary: Delete information on a transaction
-      description: API for removing information on transaction by its ID 
+      summary: Delete note on a transaction
+      description: API for removing note on transaction by its ID 
       parameters :
         - in: header
           name: Authorization
           description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: path
+          name: accountId
+          description: The ID of the account
           required: true
           type: string
         - in: path
@@ -256,24 +272,18 @@ paths:
       produces :
         - application/json
       responses :
-        '200':
-          description: Transaction information deleted successfully
-          schema:
-              $ref: '#/definitions/DeleteTransitionResponse'
+        '204':
+          description: The note on the transaction was successfully deleted
         '400':
-          description: Invalid fields
+          description: The field is invalid.
           schema:
-              $ref: '#/definitions/InvalidFieldFor2Ids'
+              $ref: '#/definitions/InvalidField3Id'
         '401':
-          description: Unauthorized
+          description: The request lacks valid authentication credentials. Check the "Authorization" header.
           schema:
               $ref: '#/definitions/ErrorAuthorized'
-        '403':
-          description: Forbidden
-          schema:
-              $ref: '#/definitions/ErrorForbidden'
         '404':
-          description: Not Found
+          description: The requested resource was not found.
           schema:
               $ref: '#/definitions/ErrorNotFound'
 securityDefinitions:
@@ -281,20 +291,21 @@ securityDefinitions:
     type: apiKey
     name: Authorization
     in: header
-    
 definitions:
   ListOfTransactionsResponse:
     type: object
     properties:
       accountId:
-        type: string
+        type: integer
+        example: 'a1234'
       transactions:
         type: array
         items:
           type: object
           properties:
             transactionId:
-              type: string
+              type: integer
+              example: 'b4578'
             date:
               type: string
               format: date
@@ -308,20 +319,12 @@ definitions:
               example: 1408.01
             description:
               type: string
-  ListOfTransInvalidField: 
-    type: object
-    properties:
-      errorCode:
-        type: string
-        example: "invalid field"
-      errorMessage:
-        type: string
-        example: "the field 'accountId' is invalid"
   TransactionDetails:
     type: object
     properties:
       transactionId:
-        type: string
+        type: integer
+        example: 'b4578'
       date:
         type: string
         format : date
@@ -332,7 +335,7 @@ definitions:
         type: number
         format: double
         description: transaction amount in USD
-        example: 85.78 
+        example: 75.78
       balance:
         type: number
         format: double
@@ -368,10 +371,13 @@ definitions:
         example: "success"
       message:  
         type: string
-        example: "the note added successfully"
+        example: "note added successfully"
       noteId:
         type: integer
-        example: 123
+        example: 'ab123'
+      cerateAt: 
+        type: string
+        format: date
   UpdateTransCategoryResponse:
     type: object
     properties:
@@ -380,7 +386,10 @@ definitions:
         example: "success"
       message:  
         type: string
-        example: "category modified successfully"
+        example: "category updated successfully"
+      updatedAt:
+        type: string
+        format: date
   UpdateTransNoteResponse:
     type: object
     properties:
@@ -389,7 +398,10 @@ definitions:
         example: "success"
       message:  
         type: string
-        example: "note modified successfully"
+        example: "note updated successfully"
+      updatedAt:
+        type: string
+        format: date
   UpdateTransactionCategory: 
     type: object
     properties :
@@ -409,60 +421,51 @@ definitions:
         properties:
           content: 
             type: string
-  DeleteTransitionResponse:
-    type: object
-    properties:
-      status:
-        type: string
-        example: "success"
-      message:
-        type: string
-        description: A message providing details about the result of the deletion.
-        example: "The note deleted succefully"
-  InvalidFieldFor2Ids :
-    type: object
-    properties:
-      status:
-        type: string
-        example: "invalid field"
-      errorMessage:
-        type: string
-        example: "the field 'transactionId' or 'noteId' is invalid"
   InvalidField: 
     type: object
     properties:
-      status:
+      status: 
         type: string
-        example: "invalid field"
+        example: "400"
       errorMessage:
         type: string
-        example: "the field 'transactionId' is invalid"
-  ErrorForbidden:
+        example: "the field 'accountId' is invalid"
+  InvalidField2Id: 
     type: object
     properties:
-      status:
+      status: 
         type: string
-        example: "forbidden"
-      message:  
+        example: "400"
+      errorMessage:
         type: string
-        example: "you do not have permission to perform this action"
-
+        example: "the field 'accountId' or 'transactionId' is invalid"
+  InvalidField3Id: 
+    type: object
+    properties:
+      status: 
+        type: string
+        example: "400"
+      errorMessage:
+        type: string
+        example: "the field 'accountId' or 'transactionId' or 'noteId' is invalid"
   ErrorAuthorized:
     type: object
     properties:
       status:
         type: string
-        example: "unauthorized"
+        example: "401"
       message:  
         type: string
-        example: "access token is missing or invalid"
+        example: "Invalid authorization credentials"
+      user_message:
+        type: string
+        example: "The session has expired or is invalid"
   ErrorNotFound : 
     type: object
     properties:
-        status:
+        status: 
           type: string
-          example: "not found"
+          example: "404"
         message:  
           type: string
           example: "the requested resource was not found"
-  
