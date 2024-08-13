@@ -16,7 +16,8 @@ function Menu () {
     }, [user, token])
 
     const handleLogOut = () => {
-        localStorage.removeItem('userToken')  
+        localStorage.removeItem('userToken') 
+        localStorage.removeItem('user') 
         dispatch(logoutUser())   // update Redux state : remove userdata and token 
     }
     
