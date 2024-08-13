@@ -19,7 +19,7 @@ function Login() {
         dispatch(loginUserStart());
         const resultAction = await dispatch(userLogin({ email, password })); // send the userLogin with props 
         if (userLogin.fulfilled.match(resultAction)) { // check if the dispatched action resultAction matches the fullfiled state of the userLogin async thunk.
-            const { token } = resultAction.payload.body
+            const { token } = resultAction.payload.body // extract only the token value from an object
             localStorage.setItem('userToken', token)
             const fetchProfile = await userProfile(token) //request user info by token
             const userData = fetchProfile.body 

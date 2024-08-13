@@ -24,7 +24,6 @@ function App() {
       if (!token) return 
       try {
         if (!storedUser) {
-          // if sotredUser doesn't exist, fetching from server
           const response = await userProfile(token);
           const userData = response.body
           dispatch(loginUserSuccess({ user: userData, token }))

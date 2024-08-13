@@ -30,7 +30,6 @@ const authSlice = createSlice({
         logoutUser(state) {
             state.user = null;
             state.token = null
-            localStorage.removeItem('userToken')
         },
         updateUserSuccess(state, action) {
             state.user = { ...state.user, ...action.payload } // update the user state with new data
@@ -49,7 +48,6 @@ const authSlice = createSlice({
                 state.loading = false;
                 state.user = action.payload.body // save userData here
                 state.token = action.payload.body.token; // save userToken here
-                localStorage.setItem('userToken', action.payload.token) // save userToken after login to localstorage
                 state.error = null;
             })
             .addCase(userLogin.rejected, (state, action) => {
@@ -86,7 +84,6 @@ export default authSlice.reducer
 
 
 //reducer : a function that takes the current state and action then return to new state. 
-// action.js and reducer has a important element for managing the state changes. 'createSlice' makes managing these association simpler. 
 //payload : represents the data returned from an asynchronous operation or passed along with the action. 
 //       is used to update the Redux state based on the result of the async operation. 
 // state.user = { ...state.user, ...action.payload } : 
