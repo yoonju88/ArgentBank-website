@@ -215,7 +215,7 @@ paths:
           name: noteId
           description: The ID of the transaction note to be updated
           required: true
-          type: string
+          type: string 
         - in: body
           name: body
           description: Update the transaction payload
@@ -253,22 +253,22 @@ paths:
           name: Authorization
           description: Attach Bearer JWT token
           required: true
-          type: string
+          type: string 
         - in: path
           name: accountId
           description: The ID of the account
           required: true
-          type: string
+          type: string  
         - in: path
           name: transactionId
           description: The ID of the transaction
           required: true
-          type: string
+          type: string  
         - in: path
           name: noteId
           description: The ID of the transaction note to be deleted
           required: true
-          type: string
+          type: string  
       produces :
         - application/json
       responses :
@@ -297,7 +297,7 @@ definitions:
     properties:
       accountId:
         type: integer
-        example: 'a1234'
+        example: '1234'
       transactions:
         type: array
         items:
@@ -305,7 +305,7 @@ definitions:
           properties:
             transactionId:
               type: integer
-              example: 'b4578'
+              example: '4578'
             date:
               type: string
               format: date
@@ -324,7 +324,7 @@ definitions:
     properties:
       transactionId:
         type: integer
-        example: 'b4578'
+        example: '4578'
       date:
         type: string
         format : date
@@ -374,7 +374,7 @@ definitions:
         example: "note added successfully"
       noteId:
         type: integer
-        example: 'ab123'
+        example: '12356'
       cerateAt: 
         type: string
         format: date
