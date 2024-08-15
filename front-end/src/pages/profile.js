@@ -64,7 +64,6 @@ function Profile() {
                                     label="User Name"
                                     type="text"
                                     id="text"
-                                    name="User Name"
                                     autoComplete="on"
                                     value={userName}
                                     onChange={(e) => setUserName(e.target.value)}
@@ -73,7 +72,6 @@ function Profile() {
                                     label="Fist Name"
                                     type="text"
                                     id="firstname"
-                                    name="firstname"
                                     autoComplete= 'null'
                                     placeholder ={user.firstName}   
                                     value={user.firstName}                                 
@@ -85,7 +83,6 @@ function Profile() {
                                     label="Last Name"
                                     type="text"
                                     id="lastname"
-                                    name="lastname"
                                     placeholder ={user.lastName}   
                                     value={user.lastName}                                 
                                     readOnly

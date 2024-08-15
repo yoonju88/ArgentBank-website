@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Field = ({ type, id, name, label, autoComplete, value, onChange, required, className}) => {
+const Field = ({ type, id, label, autoComplete, value, onChange, required, className}) => {
     return (
         <>
             <div className="input-wrapper">
