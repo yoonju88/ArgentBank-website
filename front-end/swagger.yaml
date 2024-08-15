@@ -38,7 +38,7 @@ paths:
         '400':
           description: The field is invalid.
           schema:
-            $ref: '#/definitions/InvalidField'
+            $ref: '#/definitions/InvalidFieldAccountId'
         '401':
           description: The request lacks valid authentication credentials. Check the "Authorization" header.
           schema:
@@ -81,7 +81,7 @@ paths:
         '400':
           description: The field is invalid.
           schema:
-            $ref: '#/definitions/InvalidField2Id'
+            $ref: '#/definitions/InvalidFieldAccountTransactionId'
         '401':
           description: The request lacks valid authentication credentials. Check the "Authorization" header.
           schema:
@@ -129,7 +129,7 @@ paths:
         '400':
           description: The field is invalid.
           schema:
-            $ref: '#/definitions/InvalidField2Id'
+            $ref: '#/definitions/InvalidFieldAccountTransactionId'
         '401':
           description: The request lacks valid authentication credentials. Check the "Authorization" header.
           schema:
@@ -174,11 +174,11 @@ paths:
         '201':
           description: New note was successfully added.
           schema:
-              $ref: '#/definitions/AddTransactaconNoteResponse'
+              $ref: '#/definitions/AddtransactionNoteResponse'
         '400':
           description: The field is invalid.
           schema:
-              $ref: '#/definitions/InvalidField2Id'
+              $ref: '#/definitions/InvalidFieldAccountTransactionId'
         '401':
           description: The request lacks valid authentication credentials. Check the "Authorization" header.
           schema:
@@ -232,7 +232,7 @@ paths:
         '400':
           description: The field is invalid.
           schema:
-            $ref: '#/definitions/InvalidField3Id'
+            $ref: '#/definitions/InvalidFieldFull'
         '401':
           description: The request lacks valid authentication credentials. Check the "Authorization" header.
           schema:
@@ -277,7 +277,7 @@ paths:
         '400':
           description: The field is invalid.
           schema:
-              $ref: '#/definitions/InvalidField3Id'
+              $ref: '#/definitions/InvalidFieldFull'
         '401':
           description: The request lacks valid authentication credentials. Check the "Authorization" header.
           schema:
@@ -363,7 +363,7 @@ definitions:
         properties:
           content: 
             type: string
-  AddTransactaconNoteResponse:
+  AddtransactionNoteResponse:
     type: object
     properties:
       status:
@@ -421,7 +421,7 @@ definitions:
         properties:
           content: 
             type: string
-  InvalidField: 
+  InvalidFieldAccountId: 
     type: object
     properties:
       status: 
@@ -430,7 +430,7 @@ definitions:
       errorMessage:
         type: string
         example: "the field 'accountId' is invalid"
-  InvalidField2Id: 
+  InvalidFieldAccountTransactionId: 
     type: object
     properties:
       status: 
@@ -439,7 +439,7 @@ definitions:
       errorMessage:
         type: string
         example: "the field 'accountId' or 'transactionId' is invalid"
-  InvalidField3Id: 
+  InvalidFieldFull: 
     type: object
     properties:
       status: 
@@ -469,3 +469,4 @@ definitions:
         message:  
           type: string
           example: "the requested resource was not found"
+  
