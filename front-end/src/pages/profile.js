@@ -7,7 +7,7 @@ import Field from "../components/Field";
 import Modal from "../containers/modal"
 import { updateUserFailure, updateUserSuccess } from '../redux/authSlice'
 import { updateUserProfile } from '../redux/api'
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
     const dispatch = useDispatch()
@@ -32,13 +32,13 @@ function Profile() {
         }
     }
 
-    useEffect(() => { 
+    useEffect(() => {
         if (user && user.userName) {
             setUserName(user.userName)
         }
     }, [user]) // to maintain newUserName even refresh the page
-    
-    useEffect (() => {
+
+    useEffect(() => {
         if (!token) {
             return navigate('/login')
         }
@@ -68,25 +68,25 @@ function Profile() {
                                     value={userName}
                                     onChange={(e) => setUserName(e.target.value)}
                                 />
-                                 <Field
+                                <Field
                                     label="Fist Name"
                                     type="text"
                                     id="firstname"
-                                    autoComplete= 'null'
-                                    placeholder ={user.firstName}   
-                                    value={user.firstName}                                 
+                                    autoComplete='null'
+                                    placeholder={user.firstName}
+                                    value={user.firstName}
                                     readOnly
                                     onChange={(e) => setUserName(e.target.value)}
                                     className="input-non-modi"
                                 />
-                                  <Field
+                                <Field
                                     label="Last Name"
                                     type="text"
                                     id="lastname"
-                                    placeholder ={user.lastName}   
-                                    value={user.lastName}                                 
+                                    placeholder={user.lastName}
+                                    value={user.lastName}
                                     readOnly
-                                    autoComplete= 'null'
+                                    autoComplete='null'
                                     onChange={(e) => setUserName(e.target.value)}
                                     className="input-non-modi"
                                 />

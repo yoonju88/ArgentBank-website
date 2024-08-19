@@ -1,9 +1,9 @@
-import React, {useState } from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { userLogin, userProfile} from '../redux/api';
+import { userLogin, userProfile } from '../redux/api';
 import { useNavigate } from 'react-router-dom';
 import { loginUserStart, loginUserFailure, loginUserSuccess } from '../redux/authSlice';
-import Button from '../components/Button' 
+import Button from '../components/Button'
 import Field from '../components/Field';
 
 
@@ -22,7 +22,7 @@ function Login() {
             const { token } = resultAction.payload.body // extract only the token value from an object
             localStorage.setItem('userToken', token)
             const fetchProfile = await userProfile(token) //request user info by token
-            const userData = fetchProfile.body 
+            const userData = fetchProfile.body
             localStorage.setItem('user', JSON.stringify(userData))
             dispatch(loginUserSuccess({ //send to server reducer to update login status with userdata and token
                 user: userData,
@@ -38,42 +38,42 @@ function Login() {
     return (
         <>
             <form onSubmit={handleLogin}>
-            <Field
-                label="Email"
-                type="email"
-                id="email"
-                name="Email"
-                autoComplete="on"
-                value={email}                
-                onChange={(e) => setUserEmail(e.target.value)}
-                Required
-            />
-            <Field
-                label="Password"
-                type="password"
-                id="password"
-                name="Password"
-                autoComplete="on"
-                value={password}                
-                onChange={(e) => setUserPassword(e.target.value)}
-                Required
-            />
+                <Field
+                    label="Email"
+                    type="email"
+                    id="email"
+                    name="Email"
+                    autoComplete="on"
+                    value={email}
+                    onChange={(e) => setUserEmail(e.target.value)}
+                    Required
+                />
+                <Field
+                    label="Password"
+                    type="password"
+                    id="password"
+                    name="Password"
+                    autoComplete="on"
+                    value={password}
+                    onChange={(e) => setUserPassword(e.target.value)}
+                    Required
+                />
                 <div className="input-remember">
                     <input type="checkbox" id="remember-me" />
                     <label htmlFor="remember-me">Remember me</label>
                 </div>
-                <Button 
-                    className="sign-in-button" 
+                <Button
+                    className="sign-in-button"
                     type="submit"
-                    loading ={loading}
-                >        
-                    Sign In 
+                    loading={loading}
+                >
+                    Sign In
                 </Button>
             </form>
-            {error && 
-            <div className="error-container">
-                <p className='error-msg'>{error.message}</p>
-            </div>
+            {error &&
+                <div className="error-container">
+                    <p className='error-msg'>{error.message}</p>
+                </div>
             }
         </>
     )

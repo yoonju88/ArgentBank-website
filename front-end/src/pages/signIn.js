@@ -1,7 +1,7 @@
 import React from "react"
 import Login from "../containers/Login"
- 
-function SignIn () {
+
+function SignIn() {
     return (
         <>
             <section className="sign-in-content">
