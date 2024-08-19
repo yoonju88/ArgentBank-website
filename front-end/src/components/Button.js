@@ -6,7 +6,7 @@ const Button = ({ className, type, onClick, loading, children }) => {
     return (
         <button
             className={className}
-            type={type || "button"}
+            type={type}
             onClick={onClick}
             disabled={loading}
         >

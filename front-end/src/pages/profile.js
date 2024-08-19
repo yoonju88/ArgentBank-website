@@ -51,7 +51,7 @@ function Profile() {
                     <br />
                     {user && userName ? `${user.userName}` : `${user.firstName} ${user.lastName}`} !
                 </h1>
-                <Button className="edit-button" onClick={openModal}>Edit Name</Button>
+                <Button className="edit-button" onClick={openModal} type="button">Edit Name</Button>
             </div>
             {isModalOpen && (
                 <Modal

@@ -13,7 +13,7 @@ const Modal = ({Content, onClick}) => {
         <div className='modal-overlay' onClick ={handleOverlayClick}>
             <div className='modal-content' onClick ={e=> e.stopPropagation()}>
                 {Content}
-                <Button className="modal-close-button" onClick={onClick}>
+                <Button className="modal-close-button" onClick={onClick} type= "button">
                     <img className="close-icon" src={closeIcon} alt="close icon"/>
                 </Button>
             </div>
