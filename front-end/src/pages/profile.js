@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import { useState, useEffect } from "react";
 import Field from "../components/Field";
 import Modal from "../containers/modal"
-import { updateUserFailure, loginUserSuccess } from '../redux/authSlice'
+import { updateUserFailure, updateUserSuccess } from '../redux/authSlice'
 import { updateUserProfile } from '../redux/api'
 import {useNavigate} from 'react-router-dom';
 
@@ -23,7 +23,7 @@ function Profile() {
         const resultAction = await dispatch(updateUserProfile({ newUserName: userName, token }))
         if (updateUserProfile.fulfilled.match(resultAction)) {
             const updatedUser = { ...user, userName: userName };
-            dispatch(loginUserSuccess({ user: updatedUser, token }));
+            dispatch(updateUserSuccess({ user: updatedUser, token }));
             localStorage.setItem('user', JSON.stringify(updatedUser));
             closeModal()
         } else {

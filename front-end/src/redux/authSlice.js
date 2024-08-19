@@ -22,6 +22,7 @@ const authSlice = createSlice({
             state.user = action.payload.user // save userdata when login 
             state.token = action.payload.token; // save userToken when login
             state.error = null;
+            //console.log('loginUserSuccess', action.payload.user )
         },
         loginUserFailure(state, action) {
             state.loading = false;
@@ -32,10 +33,14 @@ const authSlice = createSlice({
             state.token = null
         },
         updateUserSuccess(state, action) {
+            //console.log('Updated user 성공:', action.payload )
             state.user = { ...state.user, ...action.payload } // update the user state with new data
+            //console.log('Updated user state:', state.user )
+            
         },
         updateUserFailure(state, action) {
             state.error = action.payload // gestion the error update
+            //console.log('Updated user failed:', action.payload )
         },
     },
     extraReducers: (builder) => {
@@ -49,6 +54,7 @@ const authSlice = createSlice({
                 state.user = action.payload.body // save userData here
                 state.token = action.payload.body.token; // save userToken here
                 state.error = null;
+                //console.log('userLogin', action.payload.body )
             })
             .addCase(userLogin.rejected, (state, action) => {
                 state.loading = false;
@@ -59,7 +65,7 @@ const authSlice = createSlice({
                 state.error = null;
             })
             .addCase(updateUserProfile.fulfilled, (state, action) => {
-                //console.log('payload:', action.payload)
+                //console.log('update payload:', action.payload)
                 state.user = { ...state.user, ...action.payload } //Updates only the userName element of the userData objet
                 state.loading = false;
             })
