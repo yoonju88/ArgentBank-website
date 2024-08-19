@@ -11,7 +11,7 @@ const Modal = ({Content, onClick}) => {
     };
     return (
         <div className='modal-overlay' onClick ={handleOverlayClick}>
-            <div className='modal-content' onClick ={(e)=> e.stopPropagation()}>
+            <div className='modal-content' onClick ={e=> e.stopPropagation()}>
                 {Content}
                 <Button className="modal-close-button" onClick={onClick}>
                     <img className="close-icon" src={closeIcon} alt="close icon"/>
