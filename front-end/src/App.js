@@ -17,26 +17,20 @@ function App() {
   const location = useLocation() // which page user is currently on 
   const currentPage = location.pathname; //console.log('currentpage:', currentPage)  
   const token = localStorage.getItem('userToken')
-  const storedUser = localStorage.getItem('user')
 
   useEffect(() => {
     const fetchUserProfile = async () => {
       if (!token) return 
       try {
-        if (!storedUser) {
           const response = await userProfile(token);
           const userData = response.body
           dispatch(loginUserSuccess({ user: userData, token }))
-        } else if (storedUser) {
-          const userData = JSON.parse(storedUser)
-          dispatch(loginUserSuccess({ user: userData , token })); // parse : used to convert a JSON string into a JavaScript object
-        }
-      } catch (error) {
+        } catch (error) {
         console.error('Failed to receive user profile', error)
       } 
     }
     fetchUserProfile()
-  }, [dispatch, storedUser, token]) // Ensure that the login status is maintained even when navitagint to a new page.
+  }, [dispatch, token]) // Ensure that the login status is maintained even when navitagint to a new page.
 
   return (
     <>

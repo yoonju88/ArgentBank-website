@@ -24,7 +24,6 @@ function Profile() {
         if (updateUserProfile.fulfilled.match(resultAction)) {
             const updatedUser = { ...user, userName: userName };
             dispatch(updateUserSuccess({ user: updatedUser, token }));
-            localStorage.setItem('user', JSON.stringify(updatedUser));
             closeModal()
         } else {
             dispatch(updateUserFailure(resultAction.payload))

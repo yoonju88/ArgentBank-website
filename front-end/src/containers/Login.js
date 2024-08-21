@@ -23,7 +23,7 @@ function Login() {
             localStorage.setItem('userToken', token)
             const fetchProfile = await userProfile(token) //request user info by token
             const userData = fetchProfile.body
-            localStorage.setItem('user', JSON.stringify(userData))
+            console.log('userData', userData)
             dispatch(loginUserSuccess({ //send to server reducer to update login status with userdata and token
                 user: userData,
                 token
