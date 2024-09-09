@@ -1,3 +1,6 @@
+##ARGENTBANK
+
+
 Dans ce projet, j'ai travaillé sur le développement front-end d’une application bancaire en utilisant React et Redux pour créer une expérience utilisateur dynamique et réactive.
 
 La mission principale est d'intégrer le front-end avec le back-end via des appels API.
