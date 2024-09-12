@@ -7,4 +7,6 @@ j'ai écrit des appels à l'API REST pour connecter les deux parties de l'applic
 j'ai utilisé React pour développer l'interface utilisateur de l'application bancaire sur la création d'un tableau de bord compelt et responsive pour les utilisateurs.
 Redux est utilisé pour gérer les données de l'application qui permet de maintenir un état global cohérent à travers l'application.
 
+Code d'origin : https://github.com/OpenClassrooms-Student-Center/ArgentBank-frontend
+
 [Agent.pdf](https://github.com/user-attachments/files/16930140/Agent.pdf)
